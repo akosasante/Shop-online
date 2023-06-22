@@ -1,3 +1,4 @@
+// AKOS REVIEW: Curious about the placemont of this file
 import React, { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'

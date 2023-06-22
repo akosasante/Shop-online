@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
+// AKOS REVIEW NOTE: above can be combined into one line
 
 const rootUrl = 'https://node-course-e-commerce-8r2s.onrender.com'
 
@@ -36,6 +37,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    // AKOS REVIEW NOTE: Shouldn't we also check if !name, to ensure the user has inputted all three fields? 
     if (!email || !password) return
     const user = { name, email, password }
     const success = await handleRegister(user)
