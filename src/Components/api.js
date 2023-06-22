@@ -1,5 +1,7 @@
 const rootUrl = 'https://node-course-e-commerce-8r2s.onrender.com'
 
+// AKOS REVIEW NOTE: why duplicate the logic within each controller, if we have them here in the api module?
+
 export const handleRegister = async (user) => {
   try {
     const url = `${rootUrl}/api/v1/auth/register`

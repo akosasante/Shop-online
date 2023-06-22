@@ -51,6 +51,7 @@ const Login = () => {
 
   return (
     <div>
+{/* AKOS REVIEW NOTE: We won't ever see this welcome message, since we re-navigate to the / route in the header when the login is successful */}
       {userName && <p>Welcome {userName}!</p>}
       <h1>Login Form</h1>
       <form onSubmit={handleSubmit}>
