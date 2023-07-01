@@ -33,3 +33,15 @@
     margin-right: 15px;
     height: 30px;
 }
+
+.authButtonContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.authButtonContainer .authLinkButton {
+    margin-block: 10px;
+    margin-right: 10px;
+}

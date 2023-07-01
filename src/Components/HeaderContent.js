@@ -12,6 +12,15 @@ const WelcomeMessage = ({ username }) => {
   )
 }
 
+const NotLoggedInButtons = () => {
+  return (
+    <div className='authButtonContainer'>
+      <Link to='/login' className='authLinkButton'>Click here to login!</Link>
+      <Link to='/register' className='authLinkButton'>Click here to register!</Link>
+    </div>
+  )
+}
+
 const Header = ({ username }) => {
   let text = useRef(null)
 
@@ -41,7 +50,7 @@ const Header = ({ username }) => {
         <img className='carelloImg' src='Carello.png' alt='logo' />
       </a>
 
-      { username ? <WelcomeMessage username={username} /> : <Link to='/login' className={'authLinkButton loginButton'}>Click here to login!</Link> }
+      {username ? <WelcomeMessage username={username} /> : <NotLoggedInButtons />}
     </div>
   )
 }
