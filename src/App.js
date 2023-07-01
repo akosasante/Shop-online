@@ -1,5 +1,6 @@
 import './App.css'
-import React from 'react'
+import React, { useState } from 'react'
+
 import Header from './Components/HeaderContent'
 import Shopping from './pages/Shopping'
 import Login from './pages/Login'
@@ -9,11 +10,13 @@ import Logout from './pages/Logout'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
+  const [user, setUser] = useState(undefined);
+
   return (
     <div>
       <header>
         <nav className='header_content'>
-          <Header />
+          <Header username={user?.name} />
         </nav>
       </header>
 
@@ -23,7 +26,7 @@ function App() {
             <Route
               exact
               path='/login'
-              element={<Login afterLogin={() => {}} />}
+              element={<Login afterLogin={setUser} />}
             />
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/logout' element={<Logout />} />

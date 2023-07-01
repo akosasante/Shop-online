@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react'
+import './HeaderContent.css'
 import { gsap } from 'gsap'
 
-const Header = () => {
+const Header = ({ username }) => {
   let text = useRef(null)
 
   useEffect(() => {
@@ -29,6 +30,8 @@ const Header = () => {
       <a href='##' className='carello-button'>
         <img className='carelloImg' src='Carello.png' alt='logo' />
       </a>
+
+      { username && <p className='accountPar'>Welcome {username}</p> }
     </div>
   )
 }
