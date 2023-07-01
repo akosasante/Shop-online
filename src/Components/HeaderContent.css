@@ -2,3 +2,34 @@
     color: white;
     padding-right: 50px;
 }
+
+.authLinkButton {
+    border-top: 1px solid #f7f597;
+    background: #d6cd65;
+    padding: 8.5px 17px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 1) 0 1px 0;
+    text-shadow: rgba(0, 0, 0, .4) 0 1px 0;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.authLinkButton:hover {
+    border-top-color: #785128;
+    background: #785128;
+    color: #ccc;
+}
+
+.authLinkButton:active {
+    border-top-color: #1b435e;
+    background: #1b435e;
+}
+
+.loginButton {
+    margin-left: auto;
+    margin-top: 50px;
+    margin-right: 15px;
+    height: 30px;
+}

@@ -25,14 +25,13 @@ function App() {
 
   return (
     <div>
-      <header>
-        <nav className='header_content'>
-          <Header username={user?.name} />
-        </nav>
-      </header>
-
-      <main>
-        <Router>
+      <Router>
+        <header>
+          <nav className='header_content'>
+            <Header username={user?.name} />
+          </nav>
+        </header>
+        <main>
           <Routes>
             <Route
               exact
@@ -43,8 +42,8 @@ function App() {
             <Route exact path='/logout' element={<Logout />} />
             <Route path='*' element={<Shopping />} />
           </Routes>
-        </Router>
-      </main>
+        </main>
+      </Router>
     </div>
   )
 }

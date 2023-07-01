@@ -1,6 +1,16 @@
 import React, { useEffect, useRef } from 'react'
 import './HeaderContent.css'
 import { gsap } from 'gsap'
+import { Link } from 'react-router-dom'
+
+const WelcomeMessage = ({ username }) => {
+  return (
+    <div>
+      <p className='accountPar'>Welcome {username}</p>
+      <Link to='/logout' className='authLinkButton'>Go to logout</Link>
+    </div>
+  )
+}
 
 const Header = ({ username }) => {
   let text = useRef(null)
@@ -31,7 +41,7 @@ const Header = ({ username }) => {
         <img className='carelloImg' src='Carello.png' alt='logo' />
       </a>
 
-      { username && <p className='accountPar'>Welcome {username}</p> }
+      { username ? <WelcomeMessage username={username} /> : <Link to='/login' className={'authLinkButton loginButton'}>Click here to login!</Link> }
     </div>
   )
 }
