@@ -3,7 +3,7 @@ import { Link, Navigate } from 'react-router-dom'
 
 const rootUrl = 'https://node-course-e-commerce-8r2s.onrender.com'
 
-const Register = () => {
+const Register = ({ afterRegister }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -17,11 +17,14 @@ const Register = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify(user),
+        credentials: 'include'
       })
 
       if (response.ok) {
         console.log('Registration successful')
+        const body = await response.json()
+        afterRegister(body.user)
         return true
       } else {
         console.log('Registration failed')

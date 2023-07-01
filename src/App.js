@@ -44,7 +44,7 @@ function App() {
               path='/login'
               element={<Login afterLogin={setUser} />}
             />
-            <Route exact path='/register' element={<Register />} />
+            <Route exact path='/register' element={<Register afterRegister={setUser} />} />
             <Route exact path='/logout' element={<Logout afterLogout={resetUser} />} />
             <Route path='*' element={<Shopping />} />
           </Routes>
