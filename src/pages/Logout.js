@@ -3,16 +3,17 @@ import { Navigate } from 'react-router-dom'
 
 const rootUrl = 'https://node-course-e-commerce-8r2s.onrender.com'
 
-const Logout = () => {
+const Logout = ({ afterLogout }) => {
   const [redirectToHome, setRedirectToHome] = useState(false)
 
   const handleLogout = async () => {
     try {
       const url = `${rootUrl}/api/v1/auth/logout`
-      const response = await fetch(url)
+      const response = await fetch(url, { credentials: 'include' })
 
       if (response.ok) {
         console.log('Logout successful')
+        afterLogout(true)
         setRedirectToHome(true)
       } else {
         console.log('Logout failed')

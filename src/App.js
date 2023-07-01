@@ -23,6 +23,12 @@ function App() {
     getLoggedInUser()
   }, [])
 
+  function resetUser(wasLogoutSuccessful) {
+    if (wasLogoutSuccessful) {
+      setUser(undefined)
+    }
+  }
+
   return (
     <div>
       <Router>
@@ -39,7 +45,7 @@ function App() {
               element={<Login afterLogin={setUser} />}
             />
             <Route exact path='/register' element={<Register />} />
-            <Route exact path='/logout' element={<Logout />} />
+            <Route exact path='/logout' element={<Logout afterLogout={resetUser} />} />
             <Route path='*' element={<Shopping />} />
           </Routes>
         </main>
