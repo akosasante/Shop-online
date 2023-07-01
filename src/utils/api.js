@@ -8,19 +8,21 @@ export const handleRegister = async (user) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(user),
+      credentials: 'include'
     })
 
     if (response.ok) {
       console.log('Registration successful')
-      return true
+      const body = await response.json()
+      return { successful: true, user: body.user }
     } else {
       console.log('Registration failed')
-      return false
+      return { successful: false }
     }
   } catch (error) {
     console.log(error)
-    return false
+    return { successful: false }
   }
 }
 
@@ -32,7 +34,8 @@ export const handleLogin = async (user) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(user),
+      credentials: 'include'
     })
 
     if (response.ok) {
@@ -56,17 +59,34 @@ export const handleLogin = async (user) => {
 export const handleLogout = async () => {
   try {
     const url = `${rootUrl}/api/v1/auth/logout`
-    const response = await fetch(url)
+    const response = await fetch(url, { credentials: 'include' })
 
     if (response.ok) {
       console.log('Logout successful')
-      return true
+      return { successful: true }
     } else {
       console.log('Logout failed')
-      return false
+      return { successful: false }
     }
   } catch (error) {
     console.log(error)
-    return false
+    return { successful: false }
+  }
+}
+
+export const checkShowMe = async () => {
+  try {
+    const url = `${rootUrl}/api/v1/users/showMe`
+    const response = await fetch(url, { credentials: 'include' })
+    const body = await response.json()
+    
+    if (response.ok) {
+      console.log("checking if logged in via /showMe endpoint, result: ", body.user)
+      return body.user
+    } else {
+      console.log("checking if logged in via /showMe endpoint, result: ", body)
+    }
+  } catch (error) {
+    console.log(error)
   }
 }

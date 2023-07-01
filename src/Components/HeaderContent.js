@@ -1,14 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+import './HeaderContent.css'
 import { gsap } from 'gsap'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import Login from '../pages/Login'
-import Register from '../pages/Register'
-import Logout from '../pages/Logout'
+const WelcomeMessage = ({ username }) => {
+  return (
+    <div>
+      <p className='accountPar'>Welcome {username}</p>
+      <Link to='/logout' className='authLinkButton'>Go to logout</Link>
+    </div>
+  )
+}
 
-const Header = () => {
+const NotLoggedInButtons = () => {
+  return (
+    <div className='authButtonContainer'>
+      <Link to='/login' className='authLinkButton'>Click here to login!</Link>
+      <Link to='/register' className='authLinkButton'>Click here to register!</Link>
+    </div>
+  )
+}
+
+const Header = ({ username }) => {
   let text = useRef(null)
-  const [userName, setUserName] = useState(undefined)
 
   useEffect(() => {
     gsap.to(text, {
@@ -18,11 +32,6 @@ const Header = () => {
       repeat: -1
     })
   }, [])
-
-  function setUserNameAfterLogin(user) {
-    console.log('SETTING USER NAME in HeaderContent: ', user)
-    setUserName(user.name)
-  }
 
   return (
     <div className='headerContainer'>
@@ -36,27 +45,12 @@ const Header = () => {
       >
         Benvenuto su Jewelry Shop Olivia Rossi!
       </p>
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path='/login'
-            element={<Login afterLogin={setUserNameAfterLogin} />}
-          />
-          <Route exact path='/register' element={<Register />} />
-          <Route exact path='/logout' element={<Logout />} />
-          <Route
-            path='*'
-            element={
-              userName ? <p className='accountPar'>Welcome {userName}!</p> : ''
-            }
-          ></Route>
-        </Routes>
-      </Router>
 
       <a href='##' className='carello-button'>
         <img className='carelloImg' src='Carello.png' alt='logo' />
       </a>
+
+      {username ? <WelcomeMessage username={username} /> : <NotLoggedInButtons />}
     </div>
   )
 }
