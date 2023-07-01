@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
+import { handleRegister } from '../utils/api'
 
-const rootUrl = 'https://node-course-e-commerce-8r2s.onrender.com'
 
 const Register = ({ afterRegister }) => {
   const [name, setName] = useState('')
@@ -9,42 +9,16 @@ const Register = ({ afterRegister }) => {
   const [password, setPassword] = useState('')
   const [redirectToHome, setRedirectToHome] = useState(false)
 
-  const handleRegister = async (user) => {
-    try {
-      const url = `${rootUrl}/api/v1/auth/register`
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user),
-        credentials: 'include'
-      })
-
-      if (response.ok) {
-        console.log('Registration successful')
-        const body = await response.json()
-        afterRegister(body.user)
-        return true
-      } else {
-        console.log('Registration failed')
-        return false
-      }
-    } catch (error) {
-      console.log(error)
-      return false
-    }
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!email || !password || !name) return
     const user = { name, email, password }
-    const success = await handleRegister(user)
-    if (success) {
+    const { successful: responseSucceeded, user: loggedInUser } = await handleRegister(user)
+    if (responseSucceeded) {
       setName('')
       setEmail('')
       setPassword('')
+      afterRegister(loggedInUser)
       setRedirectToHome(true)
     }
   }
