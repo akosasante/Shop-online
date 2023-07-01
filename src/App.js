@@ -1,5 +1,5 @@
 import './App.css'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Header from './Components/HeaderContent'
 import Shopping from './pages/Shopping'
@@ -8,9 +8,20 @@ import Register from './pages/Register'
 import Logout from './pages/Logout'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { checkShowMe } from './utils/api'
 
 function App() {
   const [user, setUser] = useState(undefined);
+
+  useEffect(() => {
+    async function getLoggedInUser() {
+      const user = await checkShowMe()
+      if (user) {
+        setUser(user)
+      }
+    }
+    getLoggedInUser()
+  }, [])
 
   return (
     <div>
